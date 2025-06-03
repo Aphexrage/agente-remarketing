@@ -31,3 +31,9 @@ CREATE TABLE itens_por_venda (
     FOREIGN KEY (id_venda) REFERENCES vendas(id_venda),
     FOREIGN KEY (id_produto) REFERENCES produto(id_produto)
 )
+
+-- Durante minha analise de projeto, notei a falta de necessidade de manter a hora no vendas (data_venda)
+-- Entao decidi fazer umas mudanças no bd
+
+ALTER TABLE vendas
+MODIFY COLUMN data_venda DATE NOT NULL;
