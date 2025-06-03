@@ -1,5 +1,6 @@
 -- Insert de produtos:
-INSERT INTO produto (nome, categoria, preco) VALUES
+INSERT INTO produto (nome, categoria, preco) 
+VALUES
 
 ('Atmos SolarPhone S1', 'Celulares Solares', 1399.90),
 ('LuminaCell X Pro Solar', 'Celulares Solares', 1750.00),
@@ -51,3 +52,28 @@ INSERT INTO produto (nome, categoria, preco) VALUES
 ('EmberPower MobileStation 120W', 'Kits de Energia Solar Pequena Escala', 2500.00),
 ('SolsticeCamp PowerUnit Solar 40W', 'Kits de Energia Solar Pequena Escala', 980.00),
 ('PhotonPower Basic Kit 20W', 'Kits de Energia Solar Pequena Escala', 390.25);
+
+-- Insert dos clientes
+INSERT INTO clientes (nome, sobrenome, cpf, email) 
+VALUES
+
+('Ana', 'Silva', '10100100101', 'ana.silva@emailficticio.com.br'),
+('Bruno', 'Costa', '10100100102', 'bruno.costa@emailficticio.com.br'),
+('Carla', 'Oliveira', '10100100103', 'carla.oliveira@emailficticio.com.br'),
+('Daniel', 'Almeida', '10100100104', 'daniel.almeida@emailficticio.com.br'),
+('Eduarda', 'Ferreira', '10100100105', 'eduarda.ferreira@emailficticio.com.br'),
+('Felipe', 'Santos', '10100100106', 'felipe.santos@emailficticio.com.br'),
+('Gabriela', 'Pereira', '10100100107', 'gabriela.pereira@emailficticio.com.br'),
+('Hugo', 'Rodrigues', '10100100108', 'hugo.rodrigues@emailficticio.com.br'),
+('Isabela', 'Lima', '10100100109', 'isabela.lima@emailficticio.com.br'),
+('João', 'Mendes', '10100100110', 'joao.mendes@emailficticio.com.br'),
+('Laura', 'Gomes', '10100100111', 'laura.gomes@emailficticio.com.br'),
+('Lucas', 'Martins', '10100100112', 'lucas.martins@emailficticio.com.br'),
+('Mariana', 'Barbosa', '10100100113', 'mariana.barbosa@emailficticio.com.br'),
+('Nicolas', 'Ribeiro', '10100100114', 'nicolas.ribeiro@emailficticio.com.br'),
+('Olivia', 'Carvalho', '10100100115', 'olivia.carvalho@emailficticio.com.br'),
+('Pedro', 'Azevedo', '10100100116', 'pedro.azevedo@emailficticio.com.br'),
+('Sofia', 'Dias', '10100100117', 'sofia.dias@emailficticio.com.br'),
+('Thiago', 'Nunes', '10100100118', 'thiago.nunes@emailficticio.com.br'),
+('Valentina', 'Sousa', '10100100119', 'valentina.sousa@emailficticio.com.br'),
+('Enzo', 'Lopes', '10100100120', 'enzo.lopes@emailficticio.com.br');
