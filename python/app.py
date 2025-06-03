@@ -5,6 +5,11 @@ from dotenv import load_dotenv
 import os
 import pandas as pd
 
+load_dotenv()
+
+# Para testes de conexao:
+from mysql.connector import connect, Error
+
 # Definições do streamlit:
 st.set_page_config(
     layout= "wide",
@@ -62,13 +67,14 @@ with st.sidebar:
     st.write("Filtros:")
     clientes1compra = st.checkbox("Mostrar clientes com uma venda", False)
 
-# Configurando a conexao com o banco     
+# Configurando a conexao com o banco
+
 def conexao():
     return mysql.connect(
-        host = os.getenv("BD_HOST"),
-        user = os.getenv("BD_USER"),
+        host = os.getenv("DB_HOST"),
+        user = os.getenv("DB_USER"),
         password = os.getenv("DB_PASSWORD"),
-        database = os.getenv("DB_NOME")
+        database = os.getenv("DB_NAME")
     )
     
 def query(sql):
@@ -76,3 +82,17 @@ def query(sql):
     df = pd.read_sql(sql, conexaoQuery)
     conexaoQuery.close()
     return df
+
+clientes = "SELECT id_cliente, nome, email FROM clientes"
+df_clientes = query(clientes)
+st.write("Teste", df_clientes.shape[0])
+
+# Testando a conexao:
+if __name__ == "__main__":
+    try:
+        teste = conexao()
+        if teste.is_connected():
+            st.toast("Banco de dados conectado!")
+        teste.close()
+    except Error as e:
+        st.toast("Ouve algum problema na conexão!")
