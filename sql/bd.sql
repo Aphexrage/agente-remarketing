@@ -37,3 +37,14 @@ CREATE TABLE itens_por_venda (
 
 ALTER TABLE vendas
 MODIFY COLUMN data_venda DATE NOT NULL;
+
+INSERT INTO vendas (id_cliente, data_venda)
+VALUES 
+
+(1, '2024-11-15'),
+(5, '2025-02-10'),
+(10, '2025-05-20'),
+(1, '2025-04-05'),
+(15, '2025-03-01'),
+(7, '2025-05-12'),
+(1, '2025-06-02');
