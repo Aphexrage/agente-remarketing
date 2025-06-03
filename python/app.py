@@ -83,9 +83,13 @@ def query(sql):
     conexaoQuery.close()
     return df
 
-clientes = "SELECT id_cliente, nome, email FROM clientes"
+clientes = "SELECT * FROM clientes"
 df_clientes = query(clientes)
-st.write("Teste", df_clientes.shape[0])
+st.write("Linhas:", df_clientes.shape[0])
+
+produtos = "SELECT * FROM produto"
+df_produto = query(produtos)
+st.write("Linhas:", df_produto.shape[0])
 
 # Testando a conexao:
 if __name__ == "__main__":
@@ -96,3 +100,10 @@ if __name__ == "__main__":
         teste.close()
     except Error as e:
         st.toast("Ouve algum problema na conexão!")
+
+col1, col2 = st.columns(2)
+
+with col1:
+    st.dataframe(df_clientes)
+with col2:
+    st.dataframe(df_produto)
