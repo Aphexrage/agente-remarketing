@@ -1,10 +1,15 @@
 import streamlit as st
 import base64
+import mysql.connector as mysql
+from dotenv import load_dotenv
+import os
+import pandas as pd
 
 # Definições do streamlit:
 st.set_page_config(
     layout= "wide",
-    page_icon= "icone2.png"
+    page_icon= "./assets/icone2.png",
+    page_title="Dashboard Solus",
 )
 
 # Função para carregar as imagens no navegador
@@ -13,8 +18,21 @@ def imagemRestaurada(imagem):
         with open(imagem, "rb") as f:
             return base64.b64encode(f.read()).decode()
     except FileNotFoundError:
-        st.error("O arquivo da imagem não foi encontrado!")
+        st.toast("O arquivo da imagem não foi encontrado!")
         return None
+    
+# Função para apagar o header padrao do streamlit:
+def esconderHeader():
+    hide_st_syle = """
+        <style>
+        #MainMenu {visibility: hidden;}
+        footer {visibility: hidden;}
+        header {visibility: hidden;}
+        </style>
+    """
+    st.markdown(hide_st_syle, unsafe_allow_html=True)
+    
+esconderHeader()
     
 iconeFuncional = imagemRestaurada("./assets/icone.png")
 
@@ -32,3 +50,29 @@ if iconeFuncional:
 with st.sidebar:
     if st.button("Mandar e-mail para clientes"):
         st.toast("Teste de botao")
+        
+with st.sidebar:
+    st.header('Ordenação')
+    ordem = st.radio(
+        "Ordernar clientes por:",
+        ("Mais compras", "Menos compras"),
+        index= 0
+    )
+    st.markdown("---")
+    st.write("Filtros:")
+    clientes1compra = st.checkbox("Mostrar clientes com uma venda", False)
+
+# Configurando a conexao com o banco     
+def conexao():
+    return mysql.connect(
+        host = os.getenv("BD_HOST"),
+        user = os.getenv("BD_USER"),
+        password = os.getenv("DB_PASSWORD"),
+        database = os.getenv("DB_NOME")
+    )
+    
+def query(sql):
+    conexaoQuery = conexao()
+    df = pd.read_sql(sql, conexaoQuery)
+    conexaoQuery.close()
+    return df
