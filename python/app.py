@@ -77,19 +77,24 @@ def conexao():
         database = os.getenv("DB_NAME")
     )
     
-def query(sql):
-    conexaoQuery = conexao()
-    df = pd.read_sql(sql, conexaoQuery)
-    conexaoQuery.close()
+# Funcao para fazer query
+# Coloque seu codigo SQL
+# Retorna um dataframe para pandas da query
+# Quando faz a query, usa os dados de conexao()
+
+def fazerQuery(sql):
+    conexaoParaQuery = conexao()
+    df = pd.read_sql(sql, conexaoParaQuery)
+    conexaoParaQuery.close()
     return df
 
-clientes = "SELECT * FROM clientes"
-df_clientes = query(clientes)
-st.write("Linhas:", df_clientes.shape[0])
+df_clientes = fazerQuery("SELECT * FROM clientes")
 
-produtos = "SELECT * FROM produto"
-df_produto = query(produtos)
-st.write("Linhas:", df_produto.shape[0])
+df_produto = fazerQuery("SELECT * FROM produto")
+
+df_vendas = fazerQuery("SELECT * FROM vendas") 
+
+df_itens = fazerQuery("SELECT * FROM itens_por_venda")
 
 # Testando a conexao:
 if __name__ == "__main__":
@@ -107,3 +112,10 @@ with col1:
     st.dataframe(df_clientes)
 with col2:
     st.dataframe(df_produto)
+    
+col3, col4 = st.columns(2)
+
+with col3:
+    st.dataframe(df_itens)
+with col4:
+    st.dataframe(df_vendas)
