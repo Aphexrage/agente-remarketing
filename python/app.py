@@ -96,6 +96,26 @@ df_vendas = fazerQuery("SELECT * FROM vendas")
 
 df_itens = fazerQuery("SELECT * FROM itens_por_venda")
 
+# Quero criar uma tabela mostrando compras por clientes
+
+df_comprasPorCliente = df_vendas.groupby('id_cliente').size().reset_index(name="total")
+
+df_dadosCompletos = df_comprasPorCliente.merge(
+    df_clientes,
+    on='id_cliente'
+)
+
+df_dadosCompletos = df_dadosCompletos[[
+    "id_cliente", "nome", "sobrenome", "cpf", "email", "total"
+]]
+
+st.write("Total de compras por cliente")
+st.dataframe(
+    df_dadosCompletos,
+    use_container_width=True,
+    hide_index=True,
+    )
+
 # Testando a conexao:
 if __name__ == "__main__":
     try:
@@ -109,13 +129,16 @@ if __name__ == "__main__":
 col1, col2 = st.columns(2)
 
 with col1:
-    st.dataframe(df_clientes)
+    st.write("Clientes")
+    st.dataframe(
+        df_clientes,
+        use_container_width=True,
+        hide_index=True,
+    )
 with col2:
-    st.dataframe(df_produto)
-    
-col3, col4 = st.columns(2)
-
-with col3:
-    st.dataframe(df_itens)
-with col4:
-    st.dataframe(df_vendas)
+    st.write("Produtos")
+    st.dataframe(
+        df_produto,
+        use_container_width=True,
+        hide_index=True
+        )
