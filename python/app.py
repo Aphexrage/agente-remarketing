@@ -23,8 +23,36 @@ def imagemRestaurada(imagem):
         with open(imagem, "rb") as f:
             return base64.b64encode(f.read()).decode()
     except FileNotFoundError:
-        st.toast("O arquivo da imagem não foi encontrado!")
-        return None
+        return st.toast("O arquivo da imagem não foi encontrado") 
+    
+def imagemFundo(image_path):
+    try:
+        with open(image_path, "rb") as f:
+            encodedImagem = base64.b64encode(f.read()).decode()
+    except FileNotFoundError:
+        return st.toast("O arquivo da imagem de fundo não foi encontrado")
+    st.markdown(
+        f"""
+        <style>
+        .stApp {{
+            background-image: url("data:image/png;base64,{encodedImagem}");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }}
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+    
+def titulo(texto, cor):
+    st.markdown(
+        f"""
+        <h3 style = 'text-align: center; color: {cor}'>
+        {texto}</h3>
+        """,
+        unsafe_allow_html=True
+    )
     
 # Função para apagar o header padrao do streamlit:
 def esconderHeader():
@@ -37,9 +65,11 @@ def esconderHeader():
     """
     st.markdown(hide_st_syle, unsafe_allow_html=True)
     
-esconderHeader()
+#esconderHeader()
     
 iconeFuncional = imagemRestaurada("./assets/icone.png")
+
+fundo = imagemFundo("./assets/fundo.png")
 
 if iconeFuncional:
     st.sidebar.markdown(
@@ -109,7 +139,6 @@ df_dadosCompletos = df_dadosCompletos[[
     "id_cliente", "nome", "sobrenome", "cpf", "email", "total"
 ]]
 
-st.write("Total de compras por cliente")
 st.dataframe(
     df_dadosCompletos,
     use_container_width=True,
