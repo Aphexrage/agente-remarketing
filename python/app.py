@@ -45,11 +45,11 @@ def imagemFundo(image_path):
         unsafe_allow_html=True
     )
     
-def titulo(texto, cor):
+def titulo(texto, cor, tipo):
     st.markdown(
         f"""
-        <h3 style = 'text-align: center; color: {cor}'>
-        {texto}</h3>
+        <{tipo} style = 'text-align: center; color: {cor}'>
+        {texto}</{tipo}>
         """,
         unsafe_allow_html=True
     )
@@ -130,15 +130,28 @@ df_itens = fazerQuery("SELECT * FROM itens_por_venda")
 
 df_comprasPorCliente = df_vendas.groupby('id_cliente').size().reset_index(name="total")
 
+# Criando um dataframe que mostra todos os dados dos clientes
 df_dadosCompletos = df_comprasPorCliente.merge(
     df_clientes,
     on='id_cliente'
 )
 
+# Reorganizando as colunas do df
 df_dadosCompletos = df_dadosCompletos[[
     "id_cliente", "nome", "sobrenome", "cpf", "email", "total"
 ]]
 
+if ordem == "Mais compras":
+    df_dadosCompletos = df_dadosCompletos.sort_values(by="total", ascending=False)
+elif ordem == "Menos compras":
+    df_dadosCompletos = df_dadosCompletos.sort_values(by="total", ascending=True)
+else:
+    st.toast("Não há selecao")
+
+if clientes1compra == True:
+    df_dadosCompletos = df_dadosCompletos[df_dadosCompletos['total'] == 1]
+    
+titulo("Tabela Compras por Cliente", "#FFFFFF", "p")
 st.dataframe(
     df_dadosCompletos,
     use_container_width=True,
@@ -158,14 +171,14 @@ if __name__ == "__main__":
 col1, col2 = st.columns(2)
 
 with col1:
-    st.write("Clientes")
+    titulo("Tabela de Clientes", "#FFFFFF", "p")
     st.dataframe(
         df_clientes,
         use_container_width=True,
         hide_index=True,
     )
 with col2:
-    st.write("Produtos")
+    titulo("Tabela de Produtos", "#ffffff", "p")
     st.dataframe(
         df_produto,
         use_container_width=True,
