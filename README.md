@@ -29,6 +29,8 @@ Automatizar uma rotina de marketing:
 - Identificar clientes que não compram há um tempo.  
 - Enviar emails com desconto para estimular novas compras.
 
+<br>
+
 <p align="center">⚙️ Tecnologias utilizadas</p>
 
 <br>
@@ -40,6 +42,20 @@ Automatizar uma rotina de marketing:
   <img src="https://img.utdstc.com/icon/f6f/11c/f6f11c75fda63dd454fa5db9610a77cfd6752be4db11010f2e4252551a4abccd:200" style="width:50px; height:50px; border-radius:50%; margin:8px;" />
 </div>
 
+##
+<br>
+
+<p align="center">🖼️ Prints do Projeto</p>
+
+<br>
+
+<div align="center">
+  <img src="https://raw.githubusercontent.com/aphexrage/agente-remarketing/main/demo/dashboard.png" width="800px" style="margin: 10px;" />
+  <img src="https://raw.githubusercontent.com/aphexrage/agente-remarketing/main/demo/email cliente bronze.png" width="800px" style="margin: 10px;" />
+  <img src="https://raw.githubusercontent.com/aphexrage/agente-remarketing/main/demo/email cliente prata.png" width="800px" style="margin: 10px;" />
+  <img src="https://raw.githubusercontent.com/aphexrage/agente-remarketing/main/demo/email cliente ouro.png" width="800px" style="margin: 10px;" />
+</div>
+
 <p align="center">
   <img 
     src="https://capsule-render.vercel.app/api?type=waving&color=ffff00&height=80&section=footer"
@@ -47,3 +63,5 @@ Automatizar uma rotina de marketing:
     alt="rodapé"
   />
 </p>
+
+<br></br>
