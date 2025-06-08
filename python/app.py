@@ -4,6 +4,7 @@ import mysql.connector as mysql
 from dotenv import load_dotenv
 import os
 import pandas as pd
+from agente import AgenteEmail
 
 load_dotenv()
 
@@ -65,7 +66,7 @@ def esconderHeader():
     """
     st.markdown(hide_st_syle, unsafe_allow_html=True)
     
-#esconderHeader()
+esconderHeader()
     
 iconeFuncional = imagemRestaurada("./assets/icone.png")
 
@@ -84,7 +85,19 @@ if iconeFuncional:
 # Botao para ativar o agente
 with st.sidebar:
     if st.button("Mandar e-mail para clientes"):
-        st.toast("Teste de botao")
+        with st.spinner("Enviando e-mails"):
+            agente = None
+            try:
+                agente = AgenteEmail()
+                agente.mandarEmail()
+                st.success("E-mails enviados com sucesso!")
+
+            except Exception as e:
+                st.error(f"E-mails não foram enviados! {e}")
+
+            finally:
+                if agente:
+                    agente.fecharConexao()
         
 with st.sidebar:
     st.header('Ordenação')
@@ -156,6 +169,7 @@ st.dataframe(
     df_dadosCompletos,
     use_container_width=True,
     hide_index=True,
+    height=290
     )
 
 # Testando a conexao:
@@ -176,11 +190,13 @@ with col1:
         df_clientes,
         use_container_width=True,
         hide_index=True,
+        height= 300
     )
 with col2:
     titulo("Tabela de Produtos", "#ffffff", "p")
     st.dataframe(
         df_produto,
         use_container_width=True,
-        hide_index=True
+        hide_index=True,
+        height= 300
         )
