@@ -163,6 +163,37 @@ else:
 
 if clientes1compra == True:
     df_dadosCompletos = df_dadosCompletos[df_dadosCompletos['total'] == 1]
+
+iconeTitulo = imagemRestaurada("./assets/icone2.png")
+
+st.markdown( 
+    f"""
+    <div style='
+        font-size: 35px;
+        text-align: center;
+        font-weight: bold;
+        margin-top: -100px;
+        margin-bottom: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    '>
+        <img src='data:image/png;base64,{iconeTitulo}' style='height: 40px; width: auto; margin-right: 10px;'/>
+        Interface - Agente Remarketing
+    </div>
+
+    <div style='
+        font-size: 20px;
+        text-align: center;
+        font-weight: normal;
+        margin-top: -10px;
+        margin-bottom: 20px;
+    '>
+        Dashboard de controle do bot
+    </div>
+    """,
+    unsafe_allow_html=True
+)
     
 titulo("Tabela Compras por Cliente", "#FFFFFF", "p")
 st.dataframe(
@@ -200,3 +231,5 @@ with col2:
         hide_index=True,
         height= 300
         )
+    
+st.write("Dev: Gustavo Mendes")
